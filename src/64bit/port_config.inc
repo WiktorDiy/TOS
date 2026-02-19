@@ -229,15 +229,21 @@ configure_port:
     mov rsi, FIS_ADDR+0x40
     lodsd
     call PRDWORD
-    call crlf
+    call crlf                    ;prints 504034h
 
-    mov rsi, IDENTIFY_BUF
+    mov rsi, FIS_ADDR+0x20
     lodsq
     call PRQWORD
     dot
     dot
     dot
-    dot
+    dot                           ;prints 58405Fh
+    
+    mov rsi, IDENTIFY_BUF
+    lodsq
+    call PRQWORD                  ;prints first 8 bytes that look like 40, AA, AA, AA, AA, AA, AA, AA
+                                  ;The AA come from block line 208 added for debug.
+    
  
     
     
